@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Layout with Popup Editor</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file for styling -->
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 20px;
+    }
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-container">
+    <div class="grid-item" onclick="showEditor(1)">
+      <h3 id="title1">Box 1</h3>
+      <div class="box-image" id="image1" style="background-image: url('image1.jpg')"></div>
+      <a href="#" id="url1">Link</a>
+    </div>
+    <div class="grid-item" onclick="showEditor(2)">
+      <h3 id="title2">Box 2</h3>
+      <div class="box-image" id="image2" style="background-image: url('image2.jpg')"></div>
+      <a href="#" id="url2">Link</a>
+    </div>
+    <div class="grid-item" onclick="showEditor(3)">
+      <h3 id="title3">Box 3</h3>
+      <div class="box-image" id="image3" style="background-image: url('image3.jpg')"></div>
+      <a href="#" id="url3">Link</a>
+    </div>
+    <div class="grid-item" onclick="showEditor(4)">
+      <h3 id="title4">Box 4</h3>
+      <div class="box-image" id="image4" style="background-image: url('image4.jpg')"></div>
+      <a href="#" id="url4">Link</a>
+    </div>
+    <div class="grid-item" onclick="showEditor(5)">
+      <h3 id="title5">Box 5</h3>
+      <div class="box-image" id="image5" style="background-image: url('image5.jpg')"></div>
+      <a href="#" id="url5">Link</a>
+    </div>
+    <div class="grid-item" onclick="showEditor(6)">
+      <h3 id="title6">Box 6</h3>
+      <div class="box-image" id="image6" style="background-image: url('image6.jpg')"></div>
+      <a href="#" id="url6">Link</a>
+    </div>
+  </div>
+
+  <!-- Popup Editor -->
+  <div class="popup-editor" id="popupEditor">
+    <div class="editor-content">
+      <h3>Edit Box</h3>
+      <label for="title">Title:</label>
+      <input type="text" id="title">
+      <label for="image">Image URL:</label>
+      <input type="text" id="image">
+      <label for="url">URL:</label>
+      <input type="text" id="url">
+      <button onclick="saveChanges()">Save</button>
+    </div>
+  </div>
+
+  <script>
+    function showEditor(boxNumber) {
+      var title = document.getElementById("title" + boxNumber).textContent;
+      var image = document.getElementById("image" + boxNumber).style.backgroundImage.slice(5, -2);
+      var url = document.getElementById("url" + boxNumber).getAttribute("href");
+
+      document.getElementById("title").value = title;
+      document.getElementById("image").value = image;
+      document.getElementById("url").value = url;
+
+      document.getElementById("popupEditor").style.display = "block";
+    }
+
+    function saveChanges() {
+      var title = document.getElementById("title").value;
+      var image = document.getElementById("image").value;
+      var url = document.getElementById("url").value;
+
+      // Update the box with the new values
+      document.getElementById("title" + boxNumber).textContent = title;
+      document.getElementById("image" + boxNumber).style.backgroundImage = "url('" + image + "')";
+      document.getElementById("url" + boxNumber).setAttribute("href", url);
+
+      // Hide the editor popup
+      document.getElementById("popupEditor").style.display = "none";
+    }
+  </script>
+</body>
+</html>
